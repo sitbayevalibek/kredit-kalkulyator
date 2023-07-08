@@ -1,13 +1,77 @@
 import streamlit as st
 
 def credit_decision(yosh, jins, ish, uy, oylik_miqdori, oy, plastik_karta, p2p_xarajatlari, foiz):
-    # Kerakli hisobotni yaratish va natijani qaytarish
-    # Hisobotni ma'lumotlarga asosan hisoblash
-    # Natijani qaytarish
-    if 18 <= yosh <= 80 and jins == "Erkak" or jins == "Ayol" and ish== "Bor" and uy=="Bor" and oylik_miqdori ==1000_000  and oy==1 and     plastik_karta=="Bor" and 1000_000 <= p2p_xarajatlari <= 2000_000 and foiz==20:
-        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100)
+    # Yoshga qarab kreditni baholash
+    narx = 0
+    if 18 <= yosh <= 30:
+        narx += 10_000_000
+    elif 30 < yosh <= 60:
+        narx += 5_000_000
+    elif 60 < yosh <= 80:
+        narx += 10_000_000
+    else:
+        return "Noto'g'ri yosh kiritildi."
+
+    # Jinsga qarab kreditni baholash
+    if jins == "Erkak":
+        narx += 0
+    elif jins == "Ayol":
+        narx += 5_000_000
+
+    # Ish joyiga qarab kreditni baholash
+    if ish == "Bor":
+        narx += 10_000_000
+    elif ish == "Yo'q":
+        narx += 20_000_000
+
+    # Uyining mavjudligiga qarab kreditni baholash
+    if uy == "Bor":
+        narx += 10_000_000
+    elif uy == "Yo'q":
+        narx += 25_000_000
+
+    # Plastik karta mavjudligiga qarab kreditni baholash
+    if plastik_karta == "Yo'q":
+        narx += 5_000_000
+    elif plastik_karta == "Bor":
+        narx += 0
+
+    # P2P xarajatlari bo'yicha kreditni baholash
+    if p2p_xarajatlari >= 200_000:
+        narx += 0
+    elif p2p_xarajatlari >=100_000:
+        narx += 500_000
+
+
+    # Kredit miqdorini hisoblash
+    kredit_miqdori = (oylik_miqdori * oy) / (foiz / 100) - narx
+    return kredit_miqdori
+
+
+    # Uyining mavjudligiga qarab kreditni baholash
+    if uy == "Bor":
+        narx = 10_000_000
+        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100) + narx
+    if uy == "Yo'q":
+        narx = 25_000_000
+        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100) - narx
         return kredit_miqdori
-    
+    # Plastik karta mavjudligiga qarab kreditni baholash
+    if plastik_karta == "Yo'q":
+        narx = 5000_000
+        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100) - narx
+    if plastik_karta == "Bor":
+        narx = 5000_000
+        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100) + narx
+        return kredit_miqdori
+    # P2P xarajatlari bo'yicha kreditni baholash
+    if p2p_xarajatlari >= 100_000:
+        narx = 1_000_000
+        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100) + narx
+    if p2p_xarajatlari >=500_000:
+        narx = 5_000_000
+        kredit_miqdori = (oylik_miqdori*oy)/(foiz/100) + narx
+        return kredit_miqdori
 def main():
     # Streamlit interfeysini yaratish
     st.title("Kreditni baholash tizimi")
@@ -16,7 +80,7 @@ def main():
     yosh = st.slider("Yoshingiz", 18, 80)
     jins = st.radio("Jinsingiz", ["Erkak", "Ayol"])
     ish = st.radio("Ish joyingiz", ["Bor", "Yo'q"])
-    uy = st.radio("Uy egasi", ["Bor", "Yo'q"])
+    uy = st.radio("Uyingiz", ["Bor", "Yo'q"])
     oylik_miqdori = st.slider("Oylik daromadingiz", 1000_000, 20_000_000, step=1000_000)
     # kredit_miqdori = st.slider("Kredit miqdori", 10_000_000, 100_000_000,  step=10_000_000)
     foiz = st.radio("Yillik foiz stavkasi", [20, 25])
@@ -24,11 +88,19 @@ def main():
     plastik_karta = st.radio("Plastik karta mavjudligi", ["Bor", "Yo'q"])
     p2p_xarajatlari = st.slider("P2P xarajatlari", 100_000, 500_000, step=100_000)
 
+    # Kreditni baholash funktsiyasini chaqirish
+    # natija = int(credit_decision(yosh, jins, ish, uy, oylik_miqdori,  oy, plastik_karta, p2p_xarajatlari, foiz))
     if st.button('Submit'):
-      natija = int(credit_decision(yosh, jins, ish, uy, oylik_miqdori,  oy, plastik_karta, p2p_xarajatlari, foiz))
-      st.write("Berilishi mumkin bo'lgan kredit:")
-      st.success(natija)
-    
+        natija = credit_decision(yosh, jins, ish, uy, oylik_miqdori,  oy, plastik_karta, p2p_xarajatlari, foiz)
+        st.write("Berilishi mumkin bo'lgan kredit:")
+        if natija <= 0:
+           st.error("Kredit berilmaydi")
+        else:
+          st.success(natija)
+
+
+    # Natijani ekranga chiqarish
+    # st.write("Berilishi mumkin bo'lgan kredit:", natija, "so'm")
 
 
 
