@@ -77,11 +77,11 @@ def main():
     st.title("Kreditni baholash tizimi")
 
     # Foydalanuvchidan ma'lumotlarni kiritish
-    yosh = st.slider("Yoshingiz", 18, 80)
+    yosh = float(st.slider("Yoshingiz", 18, 80))
     jins = st.radio("Jinsingiz", ["Erkak", "Ayol"])
     ish = st.radio("Ish joyingiz", ["Bor", "Yo'q"])
     uy = st.radio("Uyingiz", ["Bor", "Yo'q"])
-    oylik_miqdori = st.slider("Oylik daromadingiz", 1000_000, 20_000_000, step=1000_000)
+    oylik_miqdori = int(st.slider("Oylik daromadingiz", 1000_000, 20_000_000, step=1000_000))
     oylik_xarajatlari = float(st.slider("Oylik xarajatlari (%)", 10, 80, step=5))
     # kredit_miqdori = st.slider("Kredit miqdori", 10_000_000, 100_000_000,  step=10_000_000)
     foiz = st.radio("Yillik foiz stavkasi", [20, 25])
