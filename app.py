@@ -77,7 +77,7 @@ def main():
     st.title("Kreditni baholash tizimi")
 
     # Foydalanuvchidan ma'lumotlarni kiritish
-    yosh = float(st.slider("Yoshingiz", 18, 80))
+    yosh = int(st.slider("Yoshingiz", 18, 80))
     jins = st.radio("Jinsingiz", ["Erkak", "Ayol"])
     ish = st.radio("Ish joyingiz", ["Bor", "Yo'q"])
     uy = st.radio("Uyingiz", ["Bor", "Yo'q"])
@@ -87,7 +87,7 @@ def main():
     foiz = st.radio("Yillik foiz stavkasi", [20, 25])
     oy = st.slider("Kredit muddati (oylar)", 12, 36, step=12)
     plastik_karta = st.radio("Plastik karta mavjudligi", ["Bor", "Yo'q"])
-    p2p_xarajatlari = st.slider("P2P xarajatlari", 100_000, 500_000, step=100_000)
+    p2p_xarajatlari = int(st.slider("P2P xarajatlari", 100_000, 500_000, step=100_000))
 
     # Kreditni baholash funktsiyasini chaqirish
     # natija = int(credit_decision(yosh, jins, ish, uy, oylik_miqdori,  oy, plastik_karta, p2p_xarajatlari, foiz))
