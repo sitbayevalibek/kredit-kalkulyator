@@ -1,7 +1,7 @@
 import streamlit as st
 
 def credit_decision(yosh, jins, ish, uy, oylik_miqdori, oy, plastik_karta, p2p_xarajatlari, foiz):
-    # Yoshga qarab kreditni baholash
+    # Yosh
     narx = 0
     if 18 <= yosh <= 30:
         narx += 10_000_000
@@ -12,31 +12,31 @@ def credit_decision(yosh, jins, ish, uy, oylik_miqdori, oy, plastik_karta, p2p_x
     else:
         return "Noto'g'ri yosh kiritildi."
 
-    # Jinsga qarab kreditni baholash
+    # Jins
     if jins == "Erkak":
         narx += 0
     elif jins == "Ayol":
         narx += 5_000_000
 
-    # Ish joyiga qarab kreditni baholash
+    # Ish joyi
     if ish == "Bor":
         narx += 10_000_000
     elif ish == "Yo'q":
         narx += 20_000_000
 
-    # Uyining mavjudligiga qarab kreditni baholash
+    # Uy
     if uy == "Bor":
         narx += 10_000_000
     elif uy == "Yo'q":
         narx += 25_000_000
 
-    # Plastik karta mavjudligiga qarab kreditni baholash
+    # Plastik karta
     if plastik_karta == "Yo'q":
         narx += 5_000_000
     elif plastik_karta == "Bor":
         narx += 0
 
-    # P2P xarajatlari bo'yicha kreditni baholash
+    # P2P xarajatlari
     if p2p_xarajatlari >= 200_000:
         narx += 0
     elif p2p_xarajatlari >=100_000:
@@ -97,12 +97,6 @@ def main():
            st.error("Kredit berilmaydi")
         else:
           st.success(natija)
-
-
-    # Natijani ekranga chiqarish
-    # st.write("Berilishi mumkin bo'lgan kredit:", natija, "so'm")
-
-
 
 if __name__ == "__main__":
     main()
