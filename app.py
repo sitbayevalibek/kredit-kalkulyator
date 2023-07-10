@@ -82,7 +82,7 @@ def main():
     ish = st.radio("Ish joyingiz", ["Bor", "Yo'q"])
     uy = st.radio("Uyingiz", ["Bor", "Yo'q"])
     oylik_miqdori = st.slider("Oylik daromadingiz", 1000_000, 20_000_000, step=1000_000)
-    oylik_xarajatlari = st.slider("Oylik xarajatlari (%)", 10, 80, step=5)
+    oylik_xarajatlari = int(st.slider("Oylik xarajatlari (%)", 10, 80, step=5))
     # kredit_miqdori = st.slider("Kredit miqdori", 10_000_000, 100_000_000,  step=10_000_000)
     foiz = st.radio("Yillik foiz stavkasi", [20, 25])
     oy = st.slider("Kredit muddati (oylar)", 12, 36, step=12)
