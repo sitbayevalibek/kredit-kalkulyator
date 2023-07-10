@@ -85,8 +85,8 @@ def main():
     oylik_miqdori = int(st.slider("Oylik daromadingiz", 1000_000, 20_000_000, step=1000_000))
     oylik_xarajatlari = float(st.slider("Oylik xarajatlari (%)", 10, 80, step=5))
     # kredit_miqdori = st.slider("Kredit miqdori", 10_000_000, 100_000_000,  step=10_000_000)
-    foiz = st.radio("Yillik foiz stavkasi", [20, 25])
-    oy = st.slider("Kredit muddati (oylar)", 12, 36, step=12)
+    foiz = int(st.radio("Yillik foiz stavkasi", [20, 25]))
+    oy = int(st.slider("Kredit muddati (oylar)", 12, 36, step=12))
     plastik_karta = st.radio("Plastik karta mavjudligi", ["Bor", "Yo'q"])
     p2p_xarajatlari = int(st.slider("P2P xarajatlari", 100_000, 500_000, step=100_000))
 
