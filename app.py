@@ -44,7 +44,7 @@ def credit_decision(yosh, jins, ish, uy, oylik_miqdori, oylik_xarajatlari, oy, p
 
 
     # Kredit miqdorini hisoblash
-    kredit_miqdori = ((oylik_miqdori-oylik_xarajatlari) * oy) / (foiz / 100) - narx
+    kredit_miqdori = ((oylik_miqdori-(oylik_miqdori*oylik_xarajatlari/100))* oy) / (foiz / 100) - narx
     return kredit_miqdori
 
 
