@@ -50,24 +50,24 @@ def credit_decision(yosh, jins, ish, uy, oylik_miqdori, oylik_xarajatlari, oy, p
 
 def main():
     # Streamlit interfeysini yaratish
-    st.title("Kreditni baholash tizimi")
-
+    st.title("Kredit Kalkuyator")
+    
     # Foydalanuvchidan ma'lumotlarni kiritish
     yosh = int(st.slider("Yoshingiz", 18, 80))
     jins = st.radio("Jinsingiz", ["Erkak", "Ayol"])
-    ish = st.radio("Ish joyingiz", ["Bor", "Yo'q"])
+    ish = st.radio("Doimiy ish joyingiz", ["Bor", "Yo'q"])
     uy = st.radio("Uyingiz", ["Bor", "Yo'q"])
-    oylik_miqdori = int(st.slider("Oylik daromadingiz", 1000000, 20000000, step=1000000))
+    oylik_miqdori = int(st.slider("Oylik daromadingiz (UZS)", 1000000, 20000000, step=1000000))
     oylik_xarajatlari = float(st.slider("Oylik xarajatlari (%)", 10, 80, step=5))
     foiz = int(st.radio("Yillik foiz stavkasi", [20, 25]))
     oy = int(st.slider("Kredit muddati (oylar)", 12, 36, step=12))
     plastik_karta = st.radio("Plastik karta mavjudligi", ["Bor", "Yo'q"])
-    p2p_xarajatlari = int(st.slider("P2P xarajatlari", 100000, 500000, step=100000))
+    p2p_xarajatlari = int(st.slider("P2P o'tkazmalari (UZS)", 100000, 500000, step=100000))
 
     # Kreditni baholash funktsiyasini chaqirish
     if st.button('Submit'):
         natija = credit_decision(yosh, jins, ish, uy, oylik_miqdori, oylik_xarajatlari, oy, plastik_karta, p2p_xarajatlari, foiz)
-        st.write("Berilishi mumkin bo'lgan kredit:")
+        st.write("Berilishi mumkin bo'lgan kredit miqdori (UZS):")
         if natija <= 0:
             st.error("Kredit berilmaydi")
         else:
